@@ -10,7 +10,4 @@ bind-random-ports: false
 bind-random-subdomains: false
 bind-random-subdomains-length: 4
 
-domain: behind.dbird.ch
-bind-hosts: behind.dbird.ch
-
 service-console: false
