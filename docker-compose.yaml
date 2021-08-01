@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  sish:
+    image: antoniomika/sish:v1.1.5
+
+    command: "\
+              --config /config/config.yml \
+              --authentication-password=${SSH_PASS} \
+              --domain=${DOMAIN} \
+              --bind-hosts=${DOMAIN} \
+             "
+    networks:
+      - proxy-net
+
+    volumes:
+      - ./config/sish/config.yml:/config/config.yml
+      - ./data/sish/pubkeys:/pubkeys
+      - ./data/sish/keys:/keys
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.sish.loadbalancer.server.port=80"
+      - "traefik.http.routers.sish.service=sish"
+      - "traefik.http.routers.sish.entrypoints=websecure"
+      - "traefik.http.routers.sish.rule=HostRegexp(`{subdomain:([^.]+\\.)?}${DOMAIN}`)"
+      - "traefik.http.routers.sish.tls.domains[0].main=*.${DOMAIN}"
+      - "traefik.http.routers.sish.tls.domains[0].sans=${DOMAIN}"
+      - "traefik.http.routers.sish.tls.certresolver=letsencrypt-dns"
+
+      - "traefik.tcp.services.sish-ssh.loadbalancer.server.port=22"
+      - "traefik.tcp.routers.sish-ssh.service=sish-ssh"
+      - "traefik.tcp.routers.sish-ssh.entrypoints=ssh"
+      - "traefik.tcp.routers.sish-ssh.rule=HostSNI(`*`)"
+
+networks:
+  proxy-net:
+    external: true

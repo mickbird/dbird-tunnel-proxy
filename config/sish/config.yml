@@ -1,0 +1,16 @@
+ssh-address: :22
+http-address: :80
+https: true
+
+authentication: true
+authentication-keys-directory: /pubkeys
+private-key-location: /keys/ssh_key
+
+bind-random-ports: false
+bind-random-subdomains: false
+bind-random-subdomains-length: 4
+
+domain: behind.dbird.ch
+bind-hosts: behind.dbird.ch
+
+service-console: false
