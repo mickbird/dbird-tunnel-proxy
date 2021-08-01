@@ -14,5 +14,5 @@ ssh -R "$($d = ''; ($v = Read-Host ""Enter app name (default: $($d ? $d : 'rando
 
 ### Manual
 ```sh
-ssh -R <app name (optional)>:80:*<target hostname (required)>*:*<target port (required)>* behind.dbird.ch
+ssh -R <app name (optional)>:80:<target hostname (required)>:<target port (required)> behind.dbird.ch
 ```
