@@ -4,7 +4,7 @@
 
 ### Shell
 ```sh
-ssh -R $(d='' && read -p "Enter app name (default: ${d:-random}) : " v && echo ${v:-$d}):80:$(d='127.0.0.1' && read -p "Enter target name (default: $d) : " v && echo ${v:-$d}):$(d='80' && read -p "Enter target port (default: $d) : " v && echo ${v:-$d}) behind.dbird.ch
+ssh -R $(d='' && read -p "Enter app name (default: ${d:-random}) : " v && echo ${v:-$d}):80:$(d='127.0.0.1' && read -p "Enter target hostname (default: $d) : " v && echo ${v:-$d}):$(d='80' && read -p "Enter target port (default: $d) : " v && echo ${v:-$d}) behind.dbird.ch
 ```
 
 ### PowerShell
@@ -14,5 +14,5 @@ ssh -R "$($d = ''; ($v = Read-Host ""Enter app name (default: $($d ? $d : 'rando
 
 ### Manual
 ```sh
-ssh -R <app name (optional)>:80:*<target hostname|ip (required)>*:*<target port (required)>* behind.dbird.ch
+ssh -R <app name (optional)>:80:*<target hostname (required)>*:*<target port (required)>* behind.dbird.ch
 ```
