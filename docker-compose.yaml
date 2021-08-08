@@ -11,6 +11,8 @@ services:
               --bind-hosts=${DOMAIN} \
              "
 
+    restart: unless-stopped
+
     networks:
       proxy-net: {}
 
@@ -39,6 +41,8 @@ services:
 
     volumes:
       - ./README.md:/docs/README.md
+
+    restart: unless-stopped
 
     ports:
       - 3000:3000
