@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   sish:
-    image: antoniomika/sish:v1.1.5
+    image: antoniomika/sish:v1.1.7
 
     command: "\
               --config /config/config.yml \
@@ -28,7 +28,6 @@ services:
       - "traefik.http.routers.sish.entrypoints=websecure"
       - "traefik.http.routers.sish.rule=HostRegexp(`{subdomain:([^.]+\\.)}${DOMAIN}`)"
       - "traefik.http.routers.sish.tls.domains[0].main=*.${DOMAIN}"
-#      - "traefik.http.routers.sish.tls.domains[0].sans=${DOMAIN}"
       - "traefik.http.routers.sish.tls.certresolver=letsencrypt-dns"
 
       - "traefik.tcp.services.sish-ssh.loadbalancer.server.port=22"
@@ -37,7 +36,7 @@ services:
       - "traefik.tcp.routers.sish-ssh.rule=HostSNI(`*`)"
 
   web:
-    image: dannyben/madness@sha256:b2a12f98cea8c7a9b5c427599dbe5d0c69b096aba9eb4caa035160b3a2d102fc
+    image: dannyben/madness:0.9.4
 
     volumes:
       - ./README.md:/docs/README.md
