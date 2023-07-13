@@ -27,8 +27,8 @@ services:
       - "traefik.http.routers.sish.service=sish"
       - "traefik.http.routers.sish.entrypoints=websecure"
       - "traefik.http.routers.sish.rule=HostRegexp(`{subdomain:([^.]+\\.)}${DOMAIN}`)"
-      - "traefik.http.routers.sish.tls.domains[0].main=*.${DOMAIN}"
       - "traefik.http.routers.sish.tls.certresolver=letsencrypt-dns"
+      - "traefik.http.routers.sish.tls.domains[0].main=*.${DOMAIN}"
 
       - "traefik.tcp.services.sish-ssh.loadbalancer.server.port=22"
       - "traefik.tcp.routers.sish-ssh.service=sish-ssh"
@@ -59,4 +59,3 @@ services:
 networks:
   proxy-net:
     external: true
-
