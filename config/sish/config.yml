@@ -4,7 +4,7 @@ https: true
 
 authentication: true
 authentication-keys-directory: /pubkeys
-private-key-location: /keys/ssh_key
+private-key-directory: /keys/ssh_key
 
 bind-random-ports: false
 bind-random-subdomains: false

@@ -2,10 +2,11 @@ version: "3.8"
 
 services:
   sish:
-    image: antoniomika/sish:v1.1.7
+    image: antoniomika/sish:v2.11.0
 
     command: "\
               --config /config/config.yml \
+              --authentication=true \
               --authentication-password=${SSH_PASS} \
               --domain=${DOMAIN} \
               --bind-hosts=${DOMAIN} \
@@ -36,7 +37,9 @@ services:
       - "traefik.tcp.routers.sish-ssh.rule=HostSNI(`*`)"
 
   web:
-    image: dannyben/madness:0.9.4
+    image: dannyben/madness:1.1.2
+
+    command: "server"
 
     volumes:
       - ./README.md:/docs/README.md
